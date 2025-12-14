@@ -1,0 +1,147 @@
+---
+id: embodied-learning
+title: "8. Embodied Learning: RL and IL"
+description: "How robots can learn from experience and demonstration."
+sidebar_position: 8
+---
+
+import Mermaid from '@theme/Mermaid';
+import CodeBlock from '@theme/CodeBlock';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## When Hand-Coding Isn't Enough
+
+For many tasks, like moving an arm to a specific point, we can design a controller based on well-understood physics and geometry. But what about tasks that require intuition, dexterity, or reacting to complex, dynamic contact? How would you program a robot to fold a towel or gracefully recover from a stumble?
+
+This is where **embodied learning** comes in. Instead of explicitly programming a behavior, we create a framework for the robot to learn it, either by practicing itself or by observing an expert. This chapter covers the two dominant paradigms: Reinforcement Learning (RL) and Imitation Learning (IL).
+
+### Reinforcement Learning (RL): Learning from Trial and Error
+
+Reinforcement Learning is analogous to how you might train a pet. You give it a command, and if it performs the correct action, you give it a treat. If it does the wrong thing, it gets no treat. Over time, the pet learns which actions lead to a reward.
+
+In RL, the "pet" is the **agent** (the robot's control policy). It exists in an **environment** and can take **actions**. After each action, the environment gives the agent a **reward** (a numerical score) and a new **state** (the new sensor readings).
+
+The agent's goal is to learn a **policy**—a strategy that maps states to actions—that maximizes its total cumulative reward over time.
+
+<Mermaid chart={`
+graph TD
+    subgraph "Agent (Robot's Brain)"
+        A(Policy);
+    end
+    subgraph "Environment (The World)"
+        B(State);
+        C(Reward);
+    end
+    
+    A --"Action"--> B;
+    B --> A;
+    C -.-> A;
+
+    linkStyle 2 stroke-dasharray: 5 5;
+`} />
+
+The core challenge of RL for robotics is the sheer amount of practice required. A learning algorithm might need millions of trials to master a task. This is usually impossible to do on a real robot due to time, cost, and safety concerns. As a result, most RL for robotics is done in **simulation**, which introduces its own challenge of transferring the learned skill to the real world (the "sim-to-real" problem, discussed in Chapter 10).
+
+### Imitation Learning (IL): Learning from an Expert
+
+If RL is learning by trial and error, Imitation Learning is learning by watching a master. Instead of a reward signal, the learning algorithm is given a dataset of expert demonstrations. This is often a more direct and efficient way to teach a robot a specific skill.
+
+#### Behavioral Cloning (BC)
+This is the simplest and most direct form of IL. It's a standard supervised learning problem.
+-   **Data:** A large dataset of `(state, expert_action)` pairs. For example, a human teleoperates a robot arm, and you record the camera images (state) and the corresponding joystick commands (expert_action) at each step.
+-   **Goal:** Train a model (typically a neural network) that takes a state as input and outputs the action the expert would have taken.
+
+BC is powerful and simple, but it has a key weakness: **distributional shift**. If the robot makes a small mistake and enters a state that wasn't in the expert's dataset, it has no idea what to do and can drift further and further off course.
+
+#### Inverse Reinforcement Learning (IRL)
+IRL is a more advanced and powerful form of IL. Instead of just copying the expert's actions, it tries to understand the expert's *intent*.
+-   **Goal:** The algorithm observes the expert's state-action pairs and tries to reverse-engineer the reward function the expert was implicitly optimizing.
+-   **Process:** Once the reward function is learned, the robot can use standard Reinforcement Learning to train a policy.
+
+This approach is more robust than BC because if the robot finds itself in a novel state, it can still use the learned reward function to figure out the best action to take to get back on track.
+
+<Mermaid chart={`
+graph TD
+    subgraph Behavioral Cloning
+        A(State) --> B(Policy);
+        B --> C(Action);
+    end
+
+    subgraph Inverse Reinforcement Learning
+        D(State, Action) --> E{Reward Function};
+        E --> F(Reinforcement Learning);
+        F --> G(Policy);
+    end
+`} />
+
+### RL vs. IL: A Summary
+-   **Reinforcement Learning:**
+    -   **Pros:** Can discover novel, superhuman behaviors.
+    -   **Cons:** Requires a carefully designed reward function and massive amounts of exploration.
+-   **Imitation Learning:**
+    -   **Pros:** Simpler to start with (just need demonstrations), bypasses the need for reward design.
+    -   **Cons:** The learned skill is fundamentally limited by the expert's ability and the diversity of the demonstrations.
+
+In modern robotics, these techniques are often blended. A robot might be pre-trained using IL to get a good starting policy, which is then fine-tuned with RL to make it more robust and optimal.
+
+### Code Example: Behavioral Cloning Data
+
+We can't train a full model here, but we can illustrate the fundamental data structure for a Behavioral Cloning problem. The goal is to create a dataset of `(state, action)` pairs that a supervised learning model could use.
+
+<Tabs>
+<TabItem value="python" label="Python">
+<CodeBlock language="python">
+{`import numpy as np
+
+class ExpertDemonstrationRecorder:
+    """A simple class to simulate the recording of expert demonstrations."""
+    
+    def __init__(self):
+        # Our dataset is a list of (state, action) tuples.
+        self.demonstrations = []
+
+    def record_step(self, camera_image, joint_angles, expert_joystick_input):
+        """
+        In a real system, this would be called in a loop as the expert
+        controls the robot.
+        """
+        # 1. Flatten and concatenate sensor data to form the 'state' vector.
+        state = np.concatenate([
+            camera_image.flatten(),
+            joint_angles.flatten()
+        ])
+        
+        # 2. The 'action' is the expert's command.
+        action = expert_joystick_input
+        
+        # 3. Add the (state, action) pair to our dataset.
+        self.demonstrations.append((state, action))
+        print(f"Recorded step. State shape: {state.shape}, Action: {action}")
+
+    def get_dataset(self):
+        """Returns the dataset for training."""
+        return self.demonstrations
+
+# --- Simulation of collecting two steps ---
+recorder = ExpertDemonstrationRecorder()
+
+# Step 1: Expert sees the initial scene and moves the joystick.
+sim_camera_img_1 = np.random.rand(120, 160) # Simulated low-res camera image
+sim_joint_angles_1 = np.array([0.5, 0.2, -0.3]) # Robot's joint angles
+sim_joystick_1 = np.array([0.9, -0.1]) # Expert commands: move forward-right
+recorder.record_step(sim_camera_img_1, sim_joint_angles_1, sim_joystick_1)
+
+# Step 2: Expert sees the new scene and adjusts the robot.
+sim_camera_img_2 = np.random.rand(120, 160)
+sim_joint_angles_2 = np.array([0.6, 0.15, -0.35])
+sim_joystick_2 = np.array([0.8, -0.2]) # Expert continues forward-right
+recorder.record_step(sim_camera_img_2, sim_joint_angles_2, sim_joystick_2)
+
+# Now, `recorder.demonstrations` holds the data needed to train a
+# behavioral cloning model. The model's job would be to learn a function `f`
+# where `f(state) -> expert_action`.
+`}
+</CodeBlock>
+</TabItem>
+</Tabs>

@@ -1,0 +1,60 @@
+---
+id: introduction
+title: "1. Introduction to Physical AI & Humanoid Robotics"
+description: "An introduction to the core concepts of physical artificial intelligence and the field of humanoid robotics."
+sidebar_position: 1
+---
+
+import Mermaid from '@theme/Mermaid';
+
+## The Dawn of Physical Intelligence
+
+For decades, the field of Artificial Intelligence (AI) has captured the human imagination. We have seen AI master complex games, generate breathtaking art, and translate languages in the blink of an eye. This intelligence, however, has largely existed in a digital realm—a world of bits and bytes, servers and screens. **Physical AI** represents the next frontier: bringing intelligence out of the digital ether and into the physical world.
+
+Physical AI is not just about software; it's about systems that can **perceive, reason, and act** within a tangible environment. These systems are embodied in forms like self-driving cars, delivery drones, and, most compellingly, humanoid robots. Unlike their digital counterparts, they are bound by the laws of physics. They must contend with gravity, friction, uncertainty, and the endless complexities of real-world interaction.
+
+The core of a physical AI system is the **sense-plan-act loop**, a continuous, closed-loop process of interaction with the environment.
+
+<Mermaid chart={`
+graph TD
+    A[Environment] -->|Sensing| B(Perception);
+    B --> C{World Model};
+    C --> D(Planning & Decision-Making);
+    D --> E(Control);
+    E -->|Actuation| A;
+    style B fill:#bde0fe,stroke:#333,stroke-width:2px;
+    style D fill:#bde0fe,stroke:#333,stroke-width:2px;
+    style E fill:#bde0fe,stroke:#333,stroke-width:2px;
+`} />
+
+This textbook is a journey into the heart of this loop, using the ultimate challenge of the humanoid robot as our guide.
+
+## Why Build a Humanoid Robot?
+
+The question is as old as the ambition itself: why build a robot that looks like a human? The bipedal, two-armed form is notoriously difficult to stabilize and control. Yet, the motivation is profound and practical.
+
+1.  **Human-Centric Environments:** The world we have built—our homes, factories, and cities—is designed for the human form. A humanoid robot has the potential to navigate stairs, open doors, and operate tools without requiring us to redesign our entire infrastructure.
+2.  **Generalization and Flexibility:** A humanoid's two arms, dextrous hands, and mobile base provide a versatile platform capable of performing a vast range of tasks, from logistics and manufacturing to healthcare and domestic assistance. This contrasts with specialized robots that can only perform a single function.
+3.  **Intuitive Interaction:** The human form provides a natural and intuitive interface for human-robot collaboration. We can understand a humanoid's posture, gestures, and "gaze," making teamwork feel more seamless and predictable.
+
+## A Brief History of a Grand Challenge
+
+The dream of a mechanical human is ancient, but the scientific pursuit began in the 20th century.
+
+-   **1973 - WABOT-1:** Developed at Waseda University in Japan, WABOT-1 is considered the world's first full-scale humanoid robot. It could communicate in simple Japanese, measure distances, and transport objects.
+-   **2000 - Honda's ASIMO:** A watershed moment for robotics, ASIMO captured the world's attention with its ability to walk, run, and interact with people dynamically. It demonstrated that smooth, stable bipedal locomotion was achievable.
+-   **2013-Present - Boston Dynamics' Atlas:** Pushing the boundaries of dynamic locomotion, Atlas has demonstrated capabilities that were once the stuff of science fiction, from running across uneven terrain to performing complex gymnastic routines.
+-   **2020s - The Commercial Push:** In recent years, a new wave of companies (such as Tesla, Figure AI, and Agility Robotics) has entered the field, aiming to develop commercially viable humanoid robots for labor and general-purpose applications, signaling a new era of accelerated progress.
+
+## Core Challenges on the Road Ahead
+
+Creating a truly autonomous humanoid robot requires solving some of the most difficult problems in engineering and computer science. This textbook is structured around these core challenges:
+
+-   **Perception & Sensing:** How does a robot see, hear, and feel the world around it?
+-   **World Modeling:** How can it build an internal understanding of its environment and its own state within it?
+-   **Control & Locomotion:** How does a bipedal robot maintain balance and move efficiently?
+-   **Manipulation:** How can a robot skillfully grasp and use objects designed for human hands?
+-   **Planning & Decision Making:** How does a robot devise and execute a sequence of actions to achieve a goal?
+-   **Learning:** How can we enable robots to learn new skills from experience, demonstration, or even language?
+
+By exploring each of these areas, we will build a complete picture of the modern humanoid stack and chart a course toward the future of physical intelligence.

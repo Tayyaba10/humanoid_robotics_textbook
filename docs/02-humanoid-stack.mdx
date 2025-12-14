@@ -1,0 +1,83 @@
+---
+id: humanoid-stack
+title: "2. The Humanoid Stack: A Systems Overview"
+description: "A high-level look at the integrated system of software and hardware that constitutes a humanoid robot."
+sidebar_position: 2
+---
+
+import Mermaid from '@theme/Mermaid';
+
+## Deconstructing the Robot: A Layered Approach
+
+A humanoid robot is one of the most complex systems ever engineered. To manage this complexity, designers and roboticists think in terms of a **"stack"**—a set of hierarchical layers where each layer builds upon the services provided by the one below it. This is analogous to how a computer's operating system stack works, with the physical hardware at the bottom and user applications at the top.
+
+This layered approach allows for modularity and abstraction. A team working on high-level decision-making doesn't need to worry about the specific voltages being sent to a motor. They only need to trust that the lower layers will faithfully execute their commands (e.g., "walk forward").
+
+The flow of information is typically bidirectional:
+-   **Commands flow down:** High-level goals are progressively broken down into more concrete instructions at each layer.
+-   **Data flows up:** Low-level sensor data is processed and fused into progressively more abstract and meaningful representations as it moves up the stack.
+
+Let's explore the key layers of a typical humanoid robot stack.
+
+<Mermaid chart={`
+graph TD
+    subgraph "Software Stack"
+    direction TB
+        E(High-Level Planning);
+        D(Mid-Level Control & Modeling);
+        C(Low-Level Control);
+    end
+    subgraph "Hardware Layer"
+    direction TB
+        B[Actuators, Sensors, Compute, Frame];
+    end
+    
+    E --"Task Goals (e.g., 'Walk to door')"--> D;
+    D --"Control Commands (e.g., 'Set foot position')"--> C;
+    C --"Actuator Signals (e.g., 'Motor voltage/current')"--> B;
+    B --"Raw Sensor Data (e.g., 'Pixel values, encoder counts')"--> C;
+    C --"Filtered State (e.g., 'Joint angles, velocities')"--> D;
+    D --"World Model (e.g., 'Robot pose, object locations')"--> E;
+
+    style E fill:#cce5ff,stroke:#333,stroke-width:2px;
+    style D fill:#bde0fe,stroke:#333,stroke-width:2px;
+    style C fill:#a2d2ff,stroke:#333,stroke-width:2px;
+    style B fill:#89c2ff,stroke:#333,stroke-width:2px;
+`} />
+
+
+### 1. The Hardware Layer: The Physical Foundation
+
+This is the layer you can physically touch. It is the foundation upon which all software runs and all actions are performed.
+-   **Actuators:** These are the robot's "muscles." They are typically electric motors (e.g., brushless DC motors) combined with gear trains that generate the torque needed to move the robot's joints.
+-   **Sensors:** The robot's senses. This is a rich and diverse set of components, including:
+    -   **Cameras (Vision):** Provide rich visual information about the environment.
+    -   **LiDAR (Light Detection and Ranging):** Creates 3D point clouds of the environment for mapping and obstacle avoidance.
+    -   **Inertial Measurement Units (IMUs):** Measure orientation and angular velocity, crucial for balance.
+    -   **Joint Encoders:** Report the precise angle of each joint.
+    -   **Force-Torque Sensors:** Measure the forces and torques exerted on the robot's limbs, essential for manipulation and balance.
+-   **Compute:** The robot's "brain." This includes onboard computers, often with powerful GPUs for parallel processing of AI and perception algorithms.
+-   **Frame:** The robot's skeleton, providing structural integrity.
+
+### 2. Low-Level Control: The "Spinal Cord"
+
+This layer acts as the robot's reflexive spinal cord. It runs on a **real-time operating system (RTOS)**, which guarantees that commands are executed within strict time constraints (often on the order of milliseconds).
+-   **Function:** Its primary job is to take commands from the mid-level controller (e.g., "move joint 5 to 90 degrees") and translate them into the precise electrical signals sent to the actuators.
+-   **Feedback Control:** It uses classic control algorithms like PID (Proportional-Integral-Derivative) controllers to ensure the joints reach and maintain the desired positions and velocities, constantly correcting for errors detected by the joint encoders and other sensors.
+-   **Data Upstream:** It collects and sends raw or lightly filtered sensor data up to the next layer.
+
+### 3. Mid-Level Control & Modeling: The "Cerebellum"
+
+This layer is responsible for coordinated, whole-body motion and for building a coherent understanding of the world. It's the robot's center for balance and movement.
+-   **Whole-Body Control (WBC):** Instead of controlling one joint at a time, WBC algorithms coordinate all joints simultaneously to achieve a task, like keeping the robot balanced while reaching for an object.
+-   **State Estimation:** This is a critical process where data from multiple sensors (IMU, encoders, vision) is fused together to produce a single, reliable estimate of the robot's state—its position, orientation, and velocity in the world.
+-   **Motion Planning:** This component generates the smooth trajectories for the robot's limbs and torso to execute movements like walking, waving, or grasping. It takes a command like "walk forward at 0.5 m/s" and turns it into a continuous stream of target joint angles for the low-level controller.
+
+### 4. High-Level Planning & Task Layer: The "Cortex"
+
+This is the most cognitive layer of the stack, where the robot reasons about its goals and the world.
+-   **Task Planning:** This component breaks down high-level, abstract commands (e.g., "clean the table") into a logical sequence of smaller actions that the mid-level controller can understand (e.g., `[walk to table]`, `[identify objects]`, `[pick up cup]`, `[place in bin]`).
+-   **Behavior Models:** This is often implemented using structures like Behavior Trees or Finite-State Machines that manage the robot's current state and transitions between different behaviors.
+-   **Interfacing with AI Models:** This layer increasingly interacts with large-scale AI models. A Vision-Language Model (VLM) might be used to interpret a scene, or a Large Language Model (LLM) could help break down a complex natural language command into a feasible task plan.
+
+As we move through the following chapters, we will dive deep into each of these layers, exploring the specific algorithms and engineering principles that bring a humanoid robot to life.

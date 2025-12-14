@@ -1,0 +1,84 @@
+--- 
+id: simulation-sim-to-real
+title: "10. Simulation & Sim-to-Real"
+description: "Using simulators for robot development and bridging the reality gap."
+sidebar_position: 10
+---
+
+import Mermaid from '@theme/Mermaid';
+import CodeBlock from '@theme/CodeBlock';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## The Robot's Playground: The Role of Simulation
+
+Developing algorithms on a million-dollar humanoid prototype is a high-stakes game. A single bug in a control loop could lead to a catastrophic fall, causing expensive damage and weeks of downtime. For this reason, modern robotics development, especially for learning-based approaches, is deeply reliant on **simulation**.
+
+A simulator is a virtual environment where a digital twin of the robot can be tested, trained, and validated before its code ever touches real hardware.
+
+### Why Simulate?
+-   **Safety:** A robot can fall over a million times in simulation with zero cost. This freedom to fail is essential for learning algorithms that operate by trial and error.
+-   **Speed & Scale:** Simulations can be run much faster than real-time. A day of real-world experience can be compressed into minutes. Furthermore, thousands of simulations can be run in parallel on the cloud, enabling the massive scale required by modern Reinforcement Learning.
+-   **Cost:** Running a simulation is vastly cheaper than operating, maintaining, and repairing a complex physical prototype.
+
+A good robotics simulator must have a few key components:
+-   **Physics Engine:** The core of the simulator, responsible for accurately modeling forces, gravity, contact, and friction. Popular engines include MuJoCo, PhysX, and Bullet.
+-   **Rendering Engine:** To train vision-based policies, the simulator must produce realistic images. This is often handled by game engines like Unity or Unreal Engine.
+-   **Robot Model:** A high-fidelity model of the robot itself, typically in a format like URDF (Unified Robot Description Format), which defines the robot's physical properties (mass, inertia of each link) and sensor characteristics.
+
+### The "Reality Gap"
+
+As powerful as simulation is, it's never perfect. There will always be subtle (and sometimes not-so-subtle) differences between the simulated world and the real world. This discrepancy is known as the **sim-to-real gap**.
+
+Sources of the reality gap include:
+-   **Physics Mismatch:** Inaccurate modeling of friction, contact forces, or an object's mass.
+-   **Actuator Dynamics:** Unmodeled delays in motor responses or variations in power delivery.
+-   **Sensor Noise:** A real camera has motion blur and noise patterns that a simple virtual camera lacks.
+-   **Visual Differences:** Textures, lighting, and reflections in the real world are far more complex than in most simulations.
+
+A policy trained exclusively in a "perfect" simulation will likely fail when deployed on a real robot because it is not robust to these unmodeled real-world effects. The entire field of sim-to-real is dedicated to bridging this gap.
+
+### Bridging the Gap: Sim-to-Real Techniques
+
+The development cycle is not just about building in simulation; it's about transferring that work to reality.
+
+<Mermaid chart={`
+graph TD
+    A(Develop in Sim) --> B(Train Policy);
+    B --> C{Bridge Reality Gap};
+    C --> D(Deploy on Real Robot);
+    D --> E(Analyze Performance);
+    E --> A;
+`} />
+
+Two primary strategies are used to bridge the gap:
+
+#### 1. System Identification: Make the Sim More Real
+System Identification is the process of measuring the properties of the real world and updating the simulation to match. Engineers will perform experiments to measure the precise friction coefficients of the robot's feet, the mass of each link, and the response time of the motors. This data is then fed back into the simulator to create a higher-fidelity model. The goal is to shrink the reality gap by making the simulation a more accurate twin of reality.
+
+#### 2. Domain Randomization: Make the Policy More Robust
+Domain Randomization takes the opposite approach. Instead of trying to create one perfect simulation, it creates thousands of slightly different ones. During training, the policy is exposed to a wide range of variations in the simulation's parameters.
+
+For every training episode, the system might randomize:
+-   The robot's mass and the friction of its joints.
+-   The lighting conditions and textures in the scene.
+-   The position and noise of the virtual camera.
+-   The latency of the motors.
+
+By learning to succeed across this wide distribution of simulated worlds, the policy becomes robust to variation. It learns to ignore irrelevant visual textures and adapt to different physical properties. The hope is that the real world will simply feel like "just another variation" it has already seen during training.
+
+### Code Example: Logic of Domain Randomization
+
+Let's write a conceptual script for a training loop that uses domain randomization. Notice how the simulation's parameters are changed before each run.
+
+<Tabs>
+<TabItem value="python" label="Python">
+<CodeBlock language="python">
+{`import numpy as np
+
+class SimulatedRobot:
+    def __init__(self):
+        # Default physics parameters
+        self.mass = 80.0  # kg
+        self.friction = 0.7 # coefficient of friction
+        print(

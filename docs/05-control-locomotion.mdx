@@ -1,0 +1,142 @@
+---
+id: control-locomotion
+title: "5. Control Architectures for Locomotion"
+description: "The principles of bipedal walking, running, and maintaining balance."
+sidebar_position: 5
+---
+
+import Mermaid from '@theme/Mermaid';
+import CodeBlock from '@theme/CodeBlock';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## The Elegance and Terror of Two Legs
+
+Walking is an act of continuously falling and catching yourself. For humans, this is second nature. For a robot, it is a monumental control challenge. Unlike a four-legged animal or a wheeled robot, a bipedal humanoid is **dynamically stable**. It cannot simply stand still without active control; it must constantly make minute adjustments to its posture to avoid tipping over.
+
+This chapter dives into the control strategies that enable a robot to manage this "controlled fall" we call walking.
+
+### The Center of Mass and the Support Polygon
+
+To understand bipedal stability, we must first understand two key concepts:
+
+-   **Center of Mass (CoM):** The single point representing the average location of the total mass of the robot. You can think of it as the robot's balance point.
+-   **Support Polygon:** The area on the ground defined by the robot's contact points. When one foot is on the ground, it's the sole of that foot. When both feet are on the ground, it's the convex area encompassing both feet.
+
+For a robot to be statically stable (like a table), the vertical projection of its CoM must be inside the support polygon. But for walking, a dynamic process, we need a more sophisticated concept.
+
+<Mermaid chart={`
+graph TD
+    subgraph Robot Stance
+        CoM(Center of Mass);
+    end
+    subgraph Ground
+        direction LR
+        A(Left Foot)---B(Right Foot);
+        subgraph Support Polygon
+            direction TB
+            C(Center of Pressure / ZMP);
+        end
+    end
+    CoM -- Projects Down Into --> C;
+    style CoM fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    style C fill:#bde0fe,stroke:#333,stroke-width:2px;
+`} />
+
+
+### The Classic Approach: Zero Moment Point (ZMP)
+
+The **Zero Moment Point (ZMP)** is the foundational concept behind most classic humanoid walking controllers (like those used in Honda's ASIMO).
+
+The ZMP is the point on the ground where the net moment from inertial and gravitational forces is zero. In simpler terms, it's the point where the "tipping over" forces are perfectly balanced.
+
+**The ZMP Stability Criterion:** For the robot to remain dynamically stable, the ZMP *must* remain inside the support polygon at all times.
+
+A ZMP-based controller works as follows:
+1.  **Plan a ZMP Trajectory:** First, the controller plans a safe path for the ZMP to travel. This path typically moves smoothly from the center of one foot to the center of the other.
+2.  **Plan a CoM Trajectory:** Based on the desired ZMP trajectory, the controller then calculates the corresponding trajectory for the robot's Center of Mass required to produce that ZMP path.
+3.  **Calculate Joint Angles:** Finally, using inverse kinematics, the controller calculates the specific joint angles for the legs and torso that will move the CoM along its planned trajectory.
+
+This method is robust and effective, especially for walking on flat surfaces, but it can be rigid and struggles to react to unexpected disturbances.
+
+### The Modern Approach: Whole-Body Control (WBC)
+
+While ZMP is focused on a single point, **Whole-Body Control (WBC)** is a more holistic and powerful paradigm. It treats the entire robot as a single, complex, and interconnected system.
+
+Instead of pre-calculating trajectories, WBC formulates the control problem as a real-time optimization. It defines a set of **tasks** and **constraints**, which are then solved simultaneously.
+
+A typical set of tasks and constraints might look like this:
+
+-   **Highest Priority (Constraint):** Maintain physical contact with the ground without slipping.
+-   **High Priority (Task):** Keep the torso perfectly upright.
+-   **Medium Priority (Task):** Move the swing foot to its next target location.
+-   **Low Priority (Task):** Move the hands to a resting position.
+-   **Universal Constraint:** Do not exceed joint angle or torque limits.
+
+An optimizer, typically a **Quadratic Programming (QP)** solver, runs hundreds of times per second. In each cycle, it finds the set of joint torques and accelerations that best satisfies this prioritized list of tasks without violating any constraints.
+
+**Advantages of WBC:**
+-   **Reactivity:** Because it's a real-time optimization, WBC can react instantly to disturbances. If the robot is pushed, the "keep torso upright" task will immediately command the joints to counteract the force.
+-   **Flexibility:** It can seamlessly blend tasks, like walking, waving, and tracking an object with its head, all within the same control framework.
+-   **Dynamicism:** WBC is naturally suited for highly dynamic motions like running, jumping, and acrobatics, where simple ZMP planning is insufficient.
+
+### Code Example: ZMP Stability Check
+
+A full locomotion controller is incredibly complex, but we can easily write the logic for the core ZMP stability criterion. This function checks if a given ZMP coordinate lies within the support polygon defined by the robot's feet.
+
+<Tabs>
+<TabItem value="python" label="Python">
+<CodeBlock language="python">
+{`import numpy as np
+
+def is_zmp_stable(zmp_pos, support_polygon):
+    """
+    Checks if the Zero Moment Point (ZMP) is inside the support polygon.
+
+    This uses the ray casting algorithm to determine if a point is inside a polygon.
+    
+    Args:
+        zmp_pos (np.array): A 2D array [x, y] for the ZMP coordinate.
+        support_polygon (list of tuples): A list of (x, y) vertices defining the
+                                           foot/feet contact area, in order.
+    
+    Returns:
+        bool: True if the ZMP is stable (inside the polygon), False otherwise.
+    """
+    x, y = zmp_pos
+    n = len(support_polygon)
+    inside = False
+
+    p1x, p1y = support_polygon[0]
+    for i in range(n + 1):
+        p2x, p2y = support_polygon[i % n]
+        if y > min(p1y, p2y):
+            if y <= max(p1y, p2y):
+                if x <= max(p1x, p2x):
+                    if p1y != p2y:
+                        xinters = (y - p1y) * (p2x - p1x) / (p2y - p1y) + p1x
+                    if p1x == p2x or x <= xinters:
+                        inside = not inside
+        p1x, p1y = p2x, p2y
+
+    return inside
+
+# --- Simulation ---
+# Define a support polygon for two feet on the ground
+# A rectangle from (-0.1, -0.1) to (0.1, 0.3)
+foot_polygon = [
+    (-0.1, -0.1),  # Back-left corner
+    ( 0.1, -0.1),  # Back-right corner
+    ( 0.1,  0.3),  # Front-right corner
+    (-0.1,  0.3)   # Front-left corner
+]
+
+# Case 1: ZMP is safely inside the support polygon
+stable_zmp = np.array([0.0, 0.1])
+print(f"Checking stable ZMP at {stable_zmp}...")
+print(f"Result: {'Stable' if is_zmp_stable(stable_zmp, foot_polygon) else 'Unstable'}\\n`)
+
+# Case 2: ZMP is outside the support polygon
+unstable_zmp = np.array([0.2, 0.1])
+print(f"Checking unstable ZMP at {unstable_zmp}...")
+print(f"Result: {'Stable' if is_zmp_stable(unstable_zmp, foot_polygon) else 'Unstable'}`)

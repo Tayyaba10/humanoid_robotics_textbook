@@ -1,0 +1,72 @@
+---
+id: hardware-software-codesign
+title: "11. Hardware-Software Co-Design"
+description: "The interplay between hardware design and software development."
+sidebar_position: 11
+---
+
+import Mermaid from '@theme/Mermaid';
+
+## A Symbiotic Relationship
+
+A common misconception in engineering is that a project follows a clean, sequential path: first, the hardware team builds the machine, then they "throw it over the wall" to the software team to make it work. In humanoid robotics, this approach is doomed to fail.
+
+Building a capable robot is not a hardware problem or a software problem; it's a **systems** problem. The most successful robotics companies operate on a principle of deep and continuous **hardware-software co-design**. The capabilities of the software are fundamentally constrained by the quality of the hardware, and the design of the hardware should be motivated by the needs of the software.
+
+This chapter explores this critical, symbiotic relationship.
+
+### The Myth of "Software Will Fix It"
+
+No amount of clever code can overcome the limitations of poorly designed hardware. A software engineer cannot program a robot to be "gentle" if its motors are stiff and powerful with no ability to sense force. A perception algorithm cannot reliably detect objects if the robot's cameras are low-quality and mounted with a poor field of view.
+
+Effective co-design is a tight feedback loop where decisions in one domain directly influence and enable decisions in the other.
+
+<Mermaid chart={`
+graph TD
+    A(Hardware Design) --"Defines Possibilities"--> B(Software Architecture);
+    B --"Reveals Limitations"--> C(System Performance);
+    C --"Drives Requirements"--> D(Hardware Redesign / Needs);
+    D --"Informs Next Iteration"--> A;
+`} />
+
+### Co-Design in Action: Trade-Offs and Decisions
+
+Let's look at concrete examples of how hardware and software choices are intertwined, drawing on concepts from previous chapters.
+
+#### Actuator Design: Enabling Force Control
+
+As we saw in Chapter 6, the ability to control force is critical for safe and effective manipulation. This is a classic co-design problem.
+
+| Hardware Choice | Software it Enables | Software it Constrains |
+| :--- | :--- | :--- |
+| **High-Torque, Low-Gear-Ratio Actuators** | **Rich Force Control & Compliance.** Because there is little friction between the motor and the joint, software can "feel" external forces and react to them. This allows for soft, compliant behavior. | Complex control algorithms are required to manage the dynamics. Not ideal for holding a stiff position under load. |
+| **Low-Cost, High-Gear-Ratio Actuators** | **Simple, Stiff Position Control.** These are excellent at moving to a specific position and holding it rigidly. The software can be much simpler. | **No True Force Control.** The high gear ratio adds too much friction, making it impossible for the software to sense subtle external forces. The robot is "numb" to its environment. |
+
+A team that wants to build a robot capable of delicate assembly tasks *must* choose the more advanced actuator. The software problem is unsolvable otherwise.
+
+#### Sensor Suite: The Quality of Perception
+
+The software's ability to model the world (Chapter 4) and perceive its surroundings (Chapter 3) is directly tied to the sensors it receives data from.
+
+-   **Adding Force-Torque Sensors:** Placing F/T sensors in the robot's wrists and ankles is a hardware decision. It provides the software with a clean, direct measurement of contact forces. This dramatically improves the performance of balance algorithms (Chapter 5) and manipulation controllers (Chapter 6). Without them, software must *estimate* forces from noisy motor current data, which is far less reliable.
+-   **Choosing a Camera:** Opting for a high-resolution, high-framerate camera with a global shutter (a hardware choice) reduces motion blur and provides richer data to the perception stack. This enables the software to run more accurate and reliable object detection and tracking algorithms.
+
+#### Onboard Compute: The Brain of the Robot
+
+The choice of onboard computer dictates the entire software architecture, especially for modern, AI-driven robots.
+
+-   **Including a Powerful GPU:** This hardware choice is a prerequisite for running the large neural networks that define modern robotics. It enables the software team to implement:
+    -   Complex computer vision models for semantic segmentation.
+    -   VLM-based scene understanding (Chapter 9).
+    -   Potentially even running parts of an LLM planner locally on the robot.
+-   **Using only a CPU:** Without a GPU, the software team is constrained to "classical" robotics algorithms. This may be sufficient for a factory robot performing a repetitive task, but it makes it nearly impossible to build a general-purpose, AI-driven humanoid.
+
+### The Virtuous Cycle
+
+The ideal robotics development process is a virtuous cycle:
+1.  Hardware engineers create a prototype with the best possible sensors and actuators.
+2.  Software engineers use this high-quality data and control to build more advanced and robust perception and control algorithms.
+3.  The performance of this advanced software reveals the next hardware bottleneck (e.g., "We could balance better if we had a faster IMU").
+4.  This feedback informs the design of the next hardware revision.
+
+This tight integration is why progress in robotics can seem slow from the outside but is often a story of intense, iterative, and deeply collaborative engineering.
