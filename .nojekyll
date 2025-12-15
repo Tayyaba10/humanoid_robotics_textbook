@@ -1,0 +1,3 @@
+# This is a dummy file to ensure the gh-pages branch is not empty.
+# Docusaurus deployment needs to remove existing files, and an empty branch
+# causes `git rm -rf .` to fail with "fatal: pathspec '.' did not match any files".
