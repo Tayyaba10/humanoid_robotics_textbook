@@ -21,29 +21,29 @@ All tasks must adhere to the project constitution located at `.specify/memory/co
 
 **Purpose**: Project initialization and basic Docusaurus structure setup.
 
-- [ ] T001 Create Docusaurus project in `humanoid-robotics-textbook/` if not already initialized.
-- [ ] T002 Configure Docusaurus `docusaurus.config.ts` for docs-only mode.
-- [ ] T003 Set up Docusaurus `sidebars.ts` with initial module structure (empty chapters).
-- [ ] T004 Create `_category_.json` files for each module in `humanoid-robotics-textbook/docs/`.
-- [ ] T005 [P] Create initial `custom.css` in `humanoid-robotics-textbook/src/css/`.
-- [ ] T006 [P] Create placeholder `HomepageFeatures/index.tsx` in `humanoid-robotics-textbook/src/components/HomepageFeatures/`.
-- [ ] T007 Create `quickstart.md` in `humanoid-robotics-textbook/docs/` from `specs/1-humanoid-robotics-textbook/quickstart.md`.
+- [x] T001 Create Docusaurus project in `humanoid-robotics-textbook/` if not already initialized.
+- [x] T002 Configure Docusaurus `docusaurus.config.ts` for docs-only mode.
+- [x] T003 Set up Docusaurus `sidebars.ts` with initial module structure (empty chapters).
+- [x] T004 Create `_category_.json` files for each module in `humanoid-robotics-textbook/docs/`.
+- [x] T005 [P] Create initial `custom.css` in `humanoid-robotics-textbook/src/css/`.
+- [x] T006 [P] Create placeholder `HomepageFeatures/index.tsx` in `humanoid-robotics-textbook/src/components/HomepageFeatures/`.
+- [x] T007 Create `quickstart.md` in `humanoid-robotics-textbook/docs/` from `specs/1-humanoid-robotics-textbook/quickstart.md`.
 
 ## Phase 2: Foundational (Research & Initial Content)
 
 **Purpose**: Complete critical research and set up core content guidelines.
 
-- [ ] T008 [P] Research compatible NVIDIA Isaac Sim version for ROS 2 Jazzy Jalisco and Gazebo Harmonic. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
-- [ ] T009 [P] Research Docusaurus integration best practices for complex code examples and simulation environments. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
-- [ ] T010 [P] Research Docusaurus sidebar structure for multi-module textbook. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
-- [ ] T011 [P] Research Mermaid diagram integration in Docusaurus MDX. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
-- [ ] T012 [P] Research effective troubleshooting documentation strategies. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
-- [ ] T013 [P] Research citation management and integration within Docusaurus. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
-- [ ] T014 Review and incorporate content guidelines from `specs/1-humanoid-robotics-textbook/contracts/mdx-frontmatter-standard.md` into content creation process.
-- [ ] T015 Review and incorporate file naming conventions from `specs/1-humanoid-robotics-textbook/contracts/file-naming-conventions.md` into content creation process.
-- [ ] T016 Review and incorporate image and asset path guidelines from `specs/1-humanoid-robotics-textbook/contracts/image-asset-paths.md` into content creation process.
-- [ ] T017 Review and incorporate citation format standard from `specs/1-humanoid-robotics-textbook/contracts/citation-format.md` into content creation process.
-- [ ] T018 Review and incorporate glossary term tagging convention from `specs/1-humanoid-robotics-textbook/contracts/glossary-term-tagging.md` into content creation process.
+- [x] T008 [P] Research compatible NVIDIA Isaac Sim version for ROS 2 Jazzy Jalisco and Gazebo Harmonic. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
+- [x] T009 [P] Research Docusaurus integration best practices for complex code examples and simulation environments. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
+- [x] T010 [P] Research Docusaurus sidebar structure for multi-module textbook. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
+- [x] T011 [P] Research Mermaid diagram integration in Docusaurus MDX. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
+- [x] T012 [P] Research effective troubleshooting documentation strategies. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
+- [x] T013 [P] Research citation management and integration within Docusaurus. Document findings in `specs/1-humanoid-robotics-textbook/research.md`.
+- [x] T014 Review and incorporate content guidelines from `specs/1-humanoid-robotics-textbook/contracts/mdx-frontmatter-standard.md` into content creation process.
+- [x] T015 Review and incorporate file naming conventions from `specs/1-humanoid-robotics-textbook/contracts/file-naming-conventions.md` into content creation process.
+- [x] T016 Review and incorporate image and asset path guidelines from `specs/1-humanoid-robotics-textbook/contracts/image-asset-paths.md` into content creation process.
+- [x] T017 Review and incorporate citation format standard from `specs/1-humanoid-robotics-textbook/contracts/citation-format.md` into content creation process.
+- [x] T018 Review and incorporate glossary term tagging convention from `specs/1-humanoid-robotics-textbook/contracts/glossary-term-tagging.md` into content creation process.
 
 ## Phase 3: User Story 1 - Learning ROS 2 Fundamentals (Priority: P1) 🎯 MVP
 
@@ -53,15 +53,15 @@ All tasks must adhere to the project constitution located at `.specify/memory/co
 
 ### Implementation for User Story 1 (Module 1: Robotic Nervous System (ROS 2))
 
-- [ ] T019 [P] [US1] Create chapter `humanoid-robotics-textbook/docs/01-ros2/01-introduction.mdx` covering ROS 2 introduction & middleware.
-- [ ] T020 [P] [US1] Create chapter `humanoid-robotics-textbook/docs/01-ros2/02-nodes-topics-services.mdx` covering ROS 2 nodes, topics, and services.
-- [ ] T021 [P] [US1] Create chapter `humanoid-robotics-textbook/docs/01-ros2/03-urdf-robot-modeling.mdx` covering URDF & robot modeling.
-- [ ] T022 [P] [US1] Create chapter `humanoid-robotics-textbook/docs/01-ros2/04-python-agents-controllers.mdx` covering Python agents & ROS controllers.
-- [ ] T023 [P] [US1] Integrate ROS 2 commands, URDF/code snippets, sensor/control diagrams into Module 1 chapters.
-- [ ] T024 [P] [US1] Develop exercises for each chapter in Module 1, focusing on ROS 2 fundamentals and URDF modeling.
-- [ ] T025 [P] [US1] Add references to official ROS 2 documentation and relevant peer-reviewed papers in Module 1 chapters.
-- [ ] T026 [P] [US1] Ensure clear error messages, debugging guidance, and initial troubleshooting for Module 1 exercises.
-- [ ] T027 [P] [US1] Tag key terms in Module 1 chapters for glossary inclusion.
+- [x] T019 [P] [US1] Create chapter `humanoid-robotics-textbook/docs/01-ros2/01-introduction.mdx` covering ROS 2 introduction & middleware. (Content written)
+- [x] T020 [P] [US1] Create chapter `humanoid-robotics-textbook/docs/01-ros2/02-nodes-topics-services.mdx` covering ROS 2 nodes, topics, and services.
+- [x] T021 [P] [US1] Create chapter `humanoid-robotics-textbook/docs/01-ros2/03-urdf-robot-modeling.mdx` covering URDF & robot modeling.
+- [x] T022 [P] [US1] Create chapter `humanoid-robotics-textbook/docs/01-ros2/04-python-agents-controllers.mdx` covering Python agents & ROS controllers.
+- [x] T023 [P] [US1] Integrate ROS 2 commands, URDF/code snippets, sensor/control diagrams into Module 1 chapters.
+- [x] T024 [P] [US1] Develop exercises for each chapter in Module 1, focusing on ROS 2 fundamentals and URDF modeling.
+- [x] T025 [P] [US1] Add references to official ROS 2 documentation and relevant peer-reviewed papers in Module 1 chapters.
+- [x] T026 [P] [US1] Ensure clear error messages, debugging guidance, and initial troubleshooting for Module 1 exercises.
+- [x] T027 [P] [US1] Tag key terms in Module 1 chapters for glossary inclusion.
 
 ## Phase 4: User Story 2 - Simulating a Humanoid Robot (Priority: P2)
 
@@ -71,15 +71,15 @@ All tasks must adhere to the project constitution located at `.specify/memory/co
 
 ### Implementation for User Story 2 (Module 2: Digital Twin (Gazebo & Unity))
 
-- [ ] T028 [P] [US2] Create chapter `humanoid-robotics-textbook/docs/02-simulation/01-gazebo-basics.mdx` covering Gazebo simulation basics.
-- [ ] T029 [P] [US2] Create chapter `humanoid-robotics-textbook/docs/02-simulation/02-physics-sensor-simulation.mdx` covering physics & sensor simulation.
-- [ ] T030 [P] [US2] Create chapter `humanoid-robotics-textbook/docs/02-simulation/03-unity-visualization.mdx` covering Unity visualization & Human-Robot Interaction.
-- [ ] T031 [P] [US2] Integrate simulation setup, URDF/SDF usage, physics concepts, sensor emulation, and diagrams into Module 2 chapters.
-- [ ] T032 [P] [US2] Develop exercises for each chapter in Module 2, focusing on Gazebo simulation and sensor data visualization.
-- [ ] T033 [P] [US2] Add references to official Gazebo/Unity documentation and relevant peer-reviewed papers in Module 2 chapters.
-- [ ] T034 [P] [US2] Ensure clear error messages, debugging guidance, and troubleshooting for Module 2 exercises.
-- [ ] T035 [P] [US2] Tag key terms in Module 2 chapters for glossary inclusion.
-- [ ] T036 [P] [US2] Create example URDF/SDF files for a simple humanoid robot for Module 2 exercises in `humanoid-robotics-textbook/static/models/`.
+- [x] T028 [P] [US2] Create chapter `humanoid-robotics-textbook/docs/02-simulation/01-gazebo-basics.mdx` covering Gazebo simulation basics.
+- [x] T029 [P] [US2] Create chapter `humanoid-robotics-textbook/docs/02-simulation/02-physics-sensor-simulation.mdx` covering physics & sensor simulation.
+- [x] T030 [P] [US2] Create chapter `humanoid-robotics-textbook/docs/02-simulation/03-unity-visualization.mdx` covering Unity visualization & Human-Robot Interaction.
+- [x] T031 [P] [US2] Integrate simulation setup, URDF/SDF usage, physics concepts, sensor emulation, and diagrams into Module 2 chapters.
+- [x] T032 [P] [US2] Develop exercises for each chapter in Module 2, focusing on Gazebo simulation and sensor data visualization.
+- [x] T033 [P] [US2] Add references to official Gazebo/Unity documentation and relevant peer-reviewed papers in Module 2 chapters.
+- [x] T034 [P] [US2] Ensure clear error messages, debugging guidance, and troubleshooting for Module 2 exercises.
+- [x] T035 [P] [US2] Tag key terms in Module 2 chapters for glossary inclusion.
+- [x] T036 [P] [US2] Create example URDF/SDF files for a simple humanoid robot for Module 2 exercises in `humanoid-robotics-textbook/static/models/`.
 
 ## Phase 5: User Story 3 - Implementing AI for Robotics (Priority: P3)
 
@@ -89,14 +89,14 @@ All tasks must adhere to the project constitution located at `.specify/memory/co
 
 ### Implementation for User Story 3 (Module 3: AI-Robot Brain (NVIDIA Isaac))
 
-- [ ] T037 [P] [US3] Create chapter `humanoid-robotics-textbook/docs/03-ai-robot-brain/01-isaac-sim-overview.mdx` covering NVIDIA Isaac Sim overview.
-- [ ] T038 [P] [US3] Create chapter `humanoid-robotics-textbook/docs/03-ai-robot-brain/02-isaac-ros-vslam.mdx` covering Isaac ROS & VSLAM.
-- [ ] T039 [P] [US3] Create chapter `humanoid-robotics-textbook/docs/03-ai-robot-brain/03-path-planning-reinforcement-learning.mdx` covering Path Planning & Reinforcement Learning.
-- [ ] T040 [P] [US3] Integrate Isaac simulation pipeline, ROS nodes, perception/motion planning, and code snippets into Module 3 chapters.
-- [ ] T041 [P] [US3] Develop exercises for each chapter in Module 3, focusing on VSLAM, path planning, and RL with Isaac Sim.
-- [ ] T042 [P] [US3] Add references to official NVIDIA Isaac documentation and relevant peer-reviewed papers in Module 3 chapters.
-- [ ] T043 [P] [US3] Ensure clear error messages, debugging guidance, and troubleshooting for Module 3 exercises.
-- [ ] T044 [P] [US3] Tag key terms in Module 3 chapters for glossary inclusion.
+- [x] T037 [P] [US3] Create chapter `humanoid-robotics-textbook/docs/03-ai-robot-brain/01-isaac-sim-overview.mdx` covering NVIDIA Isaac Sim overview.
+- [x] T038 [P] [US3] Create chapter `humanoid-robotics-textbook/docs/03-ai-robot-brain/02-isaac-ros-vslam.mdx` covering Isaac ROS & VSLAM.
+- [x] T039 [P] [US3] Create chapter `humanoid-robotics-textbook/docs/03-ai-robot-brain/03-path-planning-reinforcement-learning.mdx` covering Path Planning & Reinforcement Learning.
+- [x] T040 [P] [US3] Integrate Isaac simulation pipeline, ROS nodes, perception/motion planning, and code snippets into Module 3 chapters.
+- [x] T041 [P] [US3] Develop exercises for each chapter in Module 3, focusing on VSLAM, path planning, and RL with Isaac Sim.
+- [x] T042 [P] [US3] Add references to official NVIDIA Isaac documentation and relevant peer-reviewed papers in Module 3 chapters.
+- [x] T043 [P] [US3] Ensure clear error messages, debugging guidance, and troubleshooting for Module 3 exercises.
+- [x] T044 [P] [US3] Tag key terms in Module 3 chapters for glossary inclusion.
 
 ## Phase 6: User Story 4 - Building a Voice-Controlled Robot (Priority: P4)
 
@@ -106,31 +106,31 @@ All tasks must adhere to the project constitution located at `.specify/memory/co
 
 ### Implementation for User Story 4 (Module 4: Vision-Language-Action (VLA))
 
-- [ ] T045 [P] [US4] Create chapter `humanoid-robotics-textbook/docs/04-vla/01-voice-command-integration.mdx` covering Voice Command Integration (OpenAI Whisper).
-- [ ] T046 [P] [US4] Create chapter `humanoid-robotics-textbook/docs/04-vla/02-cognitive-planning-action-sequencing.mdx` covering Cognitive Planning & Action Sequencing.
-- [ ] T047 [P] [US4] Create chapter `humanoid-robotics-textbook/docs/04-vla/03-capstone-autonomous-humanoid.mdx` covering Capstone: Autonomous Humanoid Robot.
-- [ ] T048 [P] [US4] Integrate LLM integration, voice-to-action mapping, planning & navigation, object manipulation into Module 4 chapters.
-- [ ] T049 [P] [US4] Develop exercises for each chapter in Module 4, focusing on VLA and the capstone project.
-- [ ] T050 [P] [US4] Add references to relevant LLM and VLA research papers in Module 4 chapters.
-- [ ] T051 [P] [US4] Ensure clear error messages, debugging guidance, and troubleshooting for Module 4 exercises.
-- [ ] T052 [P] [US4] Tag key terms in Module 4 chapters for glossary inclusion.
+- [x] T045 [P] [US4] Create chapter `humanoid-robotics-textbook/docs/04-vla/01-voice-command-integration.mdx` covering Voice Command Integration (OpenAI Whisper).
+- [x] T046 [P] [US4] Create chapter `humanoid-robotics-textbook/docs/04-vla/02-cognitive-planning-action-sequencing.mdx` covering Cognitive Planning & Action Sequencing.
+- [x] T047 [P] [US4] Create chapter `humanoid-robotics-textbook/docs/04-vla/03-capstone-autonomous-humanoid.mdx` covering Capstone: Autonomous Humanoid Robot.
+- [x] T048 [P] [US4] Integrate LLM integration, voice-to-action mapping, planning & navigation, object manipulation into Module 4 chapters.
+- [x] T049 [P] [US4] Develop exercises for each chapter in Module 4, focusing on VLA and the capstone project.
+- [x] T050 [P] [US4] Add references to relevant LLM and VLA research papers in Module 4 chapters.
+- [x] T051 [P] [US4] Ensure clear error messages, debugging guidance, and troubleshooting for Module 4 exercises.
+- [x] T052 [P] [US4] Tag key terms in Module 4 chapters for glossary inclusion.
 
 ## Phase 7: Polish & Cross-Cutting Concerns
 
 **Purpose**: Final review, quality assurance, and deployment preparation.
 
-- [ ] T053 [P] Create `humanoid-robotics-textbook/docs/glossary.mdx` and populate it with tagged terms from all chapters.
-- [ ] T054 [P] Create `humanoid-robotics-textbook/docs/troubleshooting.mdx` aggregating common issues and solutions.
-- [ ] T055 [P] Review all chapters for adherence to [MDX Frontmatter Standard](specs/1-humanoid-robotics-textbook/contracts/mdx-frontmatter-standard.md).
-- [ ] T056 [P] Review all files for adherence to [File Naming Conventions](specs/1-humanoid-robotics-textbook/contracts/file-naming-conventions.md).
-- [ ] T057 [P] Review all image paths for adherence to [Image Asset Path Guidelines](specs/1-humanoid-robotics-textbook/contracts/image-asset-paths.md).
-- [ ] T058 [P] Review all citations for adherence to [Citation Format Standard](specs/1-humanoid-robotics-textbook/contracts/citation-format.md) and required percentage of peer-reviewed papers.
-- [ ] T059 [P] Perform thorough content review for clarity, accuracy, and audience appropriateness.
-- [ ] T060 [P] Conduct grammar and spelling check across the entire textbook.
-- [ ] T061 [P] Verify all code snippets are runnable on baseline hardware and produce expected results.
-- [ ] T062 [P] Validate Docusaurus build process, ensuring no broken links or navigation issues.
-- [ ] T063 Configure GitHub Pages deployment for the `humanoid-robotics-textbook/` project.
-- [ ] T064 Perform final deployment to GitHub Pages.
+- [x] T053 [P] Create humanoid-robotics-textbook/docs/glossary.mdx and populate it with tagged terms from all chapters.
+- [x] T054 [P] Create humanoid-robotics-textbook/docs/troubleshooting.mdx aggregating common issues and solutions.
+- [x] T055 [P] Review all chapters for adherence to [MDX Frontmatter Standard](specs/1-humanoid-robotics-textbook/contracts/mdx-frontmatter-standard.md).
+- [x] T056 [P] Review all files for adherence to [File Naming Conventions](specs/1-humanoid-robotics-textbook/contracts/file-naming-conventions.md).
+- [x] T057 [P] Review all image paths for adherence to [Image Asset Path Guidelines](specs/1-humanoid-robotics-textbook/contracts/image-asset-paths.md).
+- [x] T058 [P] Review all citations for adherence to [Citation Format Standard](specs/1-humanoid-robotics-textbook/contracts/citation-format.md) and required percentage of peer-reviewed papers.
+- [x] T059 [P] Perform thorough content review for clarity, accuracy, and audience appropriateness.
+- [x] T060 [P] Conduct grammar and spelling check across the entire textbook.
+- [x] T061 [P] Verify all code snippets are runnable on baseline hardware and produce expected results.
+- [x] T062 [P] Validate Docusaurus build process, ensuring no broken links or navigation issues.
+- [x] T063 Configure GitHub Pages deployment for the `humanoid-robotics-textbook/` project.
+- [x] T064 Perform final deployment to GitHub Pages.
 
 ---
 
