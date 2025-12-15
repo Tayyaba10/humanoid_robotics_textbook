@@ -54,6 +54,7 @@ As a student, I want to integrate a large language model with a simulated robot 
 - What happens if the simulation environment contains unexpected obstacles?
 - How does the system handle ambiguous voice commands?
 - What happens if a required software dependency is not installed?
+- What happens if the simulation environment or robot model exceeds the defined complexity limits?
 
 ## Requirements *(mandatory)*
 
@@ -65,6 +66,10 @@ As a student, I want to integrate a large language model with a simulated robot 
 - **FR-005**: All technical claims MUST be supported by official documentation or peer-reviewed robotics/AI sources.
 - **FR-006**: The total word count MUST be between 15,000 and 25,000 words.
 - **FR-007**: At least 40% of sources MUST be peer-reviewed robotics/AI papers.
+- **FR-008**: The textbook MUST target the following software versions: ROS 2 Jazzy Jalisco (LTS), Gazebo Harmonic, and a compatible NVIDIA Isaac Sim version.
+- **FR-009**: The textbook MUST provide clear and concise error messages with potential solutions, contextual debugging guidance (e.g., specific ROS 2 commands, how to use Gazebo/Isaac Sim debuggers), and a dedicated troubleshooting section in each chapter/module.
+- **FR-010**: Exercises MUST be designed to run smoothly on typical student hardware (Intel i5/i7, 16GB RAM, NVIDIA GPU with 8GB VRAM), with simulations running in near real-time (at least 0.5x real-time factor in Gazebo/Isaac Sim) and AI model inference within a few hundred milliseconds for perception tasks.
+- **FR-011**: The textbook MUST include a comprehensive glossary of key technical terms.
 
 ### Key Entities
 - **Textbook**: The final output, a collection of chapters in MDX format.
@@ -82,3 +87,12 @@ As a student, I want to integrate a large language model with a simulated robot 
 - **SC-003**: The final number of chapters is between 10 and 15.
 - **SC-004**: Students can successfully complete the capstone project, demonstrating an autonomous humanoid robot with perception, planning, and manipulation capabilities.
 - **SC-005**: All technical claims are referenced with a citation to an official source or peer-reviewed paper.
+
+## Clarifications
+
+### Session 2025-12-15
+- Q: What specific versions of the core software (ROS 2, Gazebo, NVIDIA Isaac) should the textbook target? → A: ROS 2 Jazzy Jalisco (LTS), Gazebo Harmonic, and a compatible NVIDIA Isaac Sim version.
+- Q: How should error messages and debugging information be presented to students for the hands-on exercises? → A: Implement clear, concise error messages directly indicating the problem and potential solutions, along with contextual debugging guidance (e.g., specific ROS 2 commands, how to use Gazebo/Isaac Sim debuggers), and a dedicated troubleshooting section in each chapter/module.
+- Q: Are there any specific performance targets for the simulations or AI models that students will build? → A: Exercises MUST be designed to run smoothly on typical student hardware (Intel i5/i7, 16GB RAM, NVIDIA GPU with 8GB VRAM), with simulations running in near real-time (at least 0.5x real-time factor in Gazebo/Isaac Sim) and AI model inference within a few hundred milliseconds for perception tasks.
+- Q: Should a glossary of key terms be included in the textbook? → A: A comprehensive glossary of key technical terms MUST be included.
+- Q: Are there any constraints on the size or complexity of the simulation environments or robot models? → A: Limit the complexity of simulation environments to simple, single-robot scenarios with a moderate number of static objects. Robot models should be kinematically simple humanoids (e.g., 15-20 degrees of freedom) to ensure manageability and performance on student hardware.
