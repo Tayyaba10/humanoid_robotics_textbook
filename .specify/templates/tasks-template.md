@@ -3,6 +3,15 @@
 description: "Task list template for feature implementation"
 ---
 
+## Constitution Reminder
+
+All tasks must adhere to the project constitution located at `.specify/memory/constitution.md`. Key principles to remember during implementation include:
+
+- **Spec-First:** All code must trace back to an approved specification.
+- **Verified Content:** Technical claims must be verifiable.
+- **Reproducibility:** Your work must be executable by others.
+- **Docusaurus Standards:** Follow the content and formatting guidelines for Docusaurus.
+
 # Tasks: [FEATURE NAME]
 
 **Input**: Design documents from `/specs/[###-feature-name]/`

@@ -31,7 +31,13 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] **Spec-First:** Is there an approved specification in `/specs` for this feature?
+- [ ] **Physical AI Focus:** Does this feature directly relate to an embodied AI concept?
+- [ ] **Verified Content:** Are all technical claims and data backed by references (docs, papers)?
+- [ ] **Reproducible:** Can the planned implementation be executed and verified by another developer?
+- [ ] **Audience-Centric:** Is the complexity and explanation appropriate for the target audience?
+- [ ] **Docusaurus Standards:** Does the plan adhere to the content structure and formatting rules?
+- [ ] **Sources & Quality:** Does the plan account for source requirements and code quality standards?
 
 ## Project Structure
 
