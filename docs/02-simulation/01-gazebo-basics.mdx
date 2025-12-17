@@ -1,0 +1,98 @@
+---
+id: chapter-2.1-gazebo-basics
+title: Gazebo Simulation Basics
+description: This chapter introduces Gazebo, a powerful 3D robotics simulator, covering its fundamental concepts, interface, and how to launch basic simulations for humanoid robots.
+sidebar_position: 1
+keywords: [Gazebo, robotics simulation, 3D simulator, URDF, SDF, ROS, humanoid]
+---
+
+# Gazebo Simulation Basics
+
+## Introduction to Robotics Simulation
+
+Robotics simulation is an indispensable tool in the development lifecycle of robotic systems, especially for complex humanoids. It allows engineers and researchers to design, test, and validate algorithms, control strategies, and hardware designs in a virtual environment before deploying them on expensive or delicate physical robots. Simulation provides a safe, repeatable, and scalable platform for experimentation.
+
+## What is Gazebo?
+
+<span class="glossary-term" data-term="Gazebo">Gazebo</span> is a powerful 3D robotics simulator that is widely used in the robotics community, particularly with the Robot Operating System (ROS). It offers the ability to accurately simulate populations of robots, sensors, and objects in a 3D environment. Gazebo comes with a robust physics engine, high-quality graphics, and convenient programmatic interfaces.
+
+### Key Features:
+
+*   **Physics Engine**: Incorporates advanced physics engines (e.g., ODE, Bullet, DART, Simbody) for realistic rigid-body dynamics, collisions, and gravity.
+*   **Sensor Simulation**: Provides accurate simulation of various sensors, including cameras (RGB, depth), LiDAR, IMU, contact sensors, and more.
+*   **3D Graphics**: Utilizes OpenGL for realistic rendering of environments and robots.
+*   **Robot Models**: Supports both <span class="glossary-term" data-term="Unified Robot Description Format (URDF)">URDF (Unified Robot Description Format)</span> and <span class="glossary-term" data-term="Simulation Description Format (SDF)">SDF (Simulation Description Format)</span> for defining robot kinematics, dynamics, and visual properties.
+*   **ROS Integration**: Deep integration with ROS, allowing seamless communication between simulated robots and ROS nodes.
+*   **Plugins**: Extensible architecture via plugins, enabling users to add custom functionality, sensors, or actuators.
+
+## Gazebo Interface
+
+Gazebo typically consists of two main components:
+
+1.  **Gazebo Server (`gzserver`)**: The backend physics and sensor engine that runs the simulation without a graphical interface.
+2.  **Gazebo Client (`gzclient`)**: The graphical user interface (GUI) that allows users to visualize the simulation, interact with robots, and inspect properties.
+
+When you launch Gazebo with its GUI, both `gzserver` and `gzclient` are usually started.
+
+## Launching a Basic Simulation
+
+To launch Gazebo, you can simply open a terminal and type `gazebo`. However, for specific robot models and environments, you often use launch files (especially in a ROS context).
+
+### Example: Launching a Simple World
+
+```bash
+# To launch an empty world
+gazebo
+
+# To launch a predefined empty world (often comes with Gazebo installation)
+gazebo worlds/empty.world
+```
+
+### Example: Launching a Robot Model (Placeholder)
+
+To launch a specific robot, like a simple humanoid model, you would typically have its URDF or SDF file.
+
+```bash
+# Assuming you have a simple_humanoid.urdf in a ROS package
+# And a corresponding launch file to load it into Gazebo
+source /opt/ros/jazzy/setup.bash # Assuming ROS 2 Jazzy is sourced
+ros2 launch my_robot_gazebo spawn_humanoid.launch.py
+```
+*Note: The actual launch command will depend on your ROS package structure and launch file configuration.*
+
+## URDF and SDF: Defining Robot Models
+
+*   **URDF (Unified Robot Description Format)**: Primarily used in ROS to describe the kinematic and dynamic properties of a robot. It defines links (rigid bodies) and joints (connections between links). URDF is an XML format.
+*   **SDF (Simulation Description Format)**: A more comprehensive XML format used by Gazebo to describe not only robots but also environments, lights, sensors, and static objects. SDF can represent a full world, whereas URDF usually describes only a single robot.
+
+For humanoid robots, you'll often start with a URDF model for ROS and then either convert it to SDF or use Gazebo's URDF parser to load it into the simulation.
+
+## Interacting with the Simulation
+
+In the Gazebo GUI, you can:
+
+*   **Navigate**: Pan, zoom, and rotate the view.
+*   **Inspect**: Click on objects to view their properties (mass, inertia, pose).
+*   **Manipulate**: Drag and drop objects, apply forces or torques (e.g., to test robot stability).
+*   **Add Objects**: Insert primitive shapes or models from the online model database.
+
+## Exercises: (Placeholder)
+
+1.  **Exercise 1**: Launch an empty Gazebo world and practice navigating the 3D environment.
+2.  **Exercise 2**: Insert a simple box and sphere from the Gazebo model library and observe their interaction under gravity.
+3.  **Exercise 3**: (Requires a simple URDF model) Load a basic humanoid URDF model into Gazebo and observe its default state.
+
+## Conclusion
+
+Gazebo provides a robust and versatile platform for simulating humanoid robots and their environments. Understanding its basics, from launching simulations to interpreting robot models defined in URDF and SDF, is foundational for developing and testing complex robotic applications.
+
+## Further Reading & Resources
+
+Refer to the official Gazebo documentation and ROS-Gazebo tutorials for more in-depth learning.
+
+---
+
+## References
+
+[1] Open Robotics, "Gazebo Documentation," [Online]. Available: https://gazebosim.org/docs.
+[2] Open Robotics, "URDF Overview," [Online]. Available: https://wiki.ros.org/urdf/Tutorials/index.

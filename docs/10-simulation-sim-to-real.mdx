@@ -74,11 +74,50 @@ Let's write a conceptual script for a training loop that uses domain randomizati
 <Tabs>
 <TabItem value="python" label="Python">
 <CodeBlock language="python">
-{`import numpy as np
+```python
+import numpy as np
 
 class SimulatedRobot:
     def __init__(self):
         # Default physics parameters
         self.mass = 80.0  # kg
         self.friction = 0.7 # coefficient of friction
-        print(
+        print(f"Robot initialized with mass: {self.mass}, friction: {self.friction}")
+
+    def randomize_domain(self):
+        """Randomizes physics parameters to create diverse training environments."""
+        self.mass = np.random.uniform(50.0, 100.0) # Randomize mass
+        self.friction = np.random.uniform(0.5, 1.0) # Randomize friction
+        # Further randomizations for textures, lighting, sensor noise etc.
+        print(f"Domain randomized. New mass: {self.mass:.2f}, new friction: {self.friction:.2f}")
+
+    def simulate_step(self, action):
+        """
+        Simulates one step of the robot's interaction with the environment.
+        (Simplified for conceptual example)
+        """
+        # Imagine complex physics calculations here...
+        # Returns next_state (e.g., sensor readings) and reward
+        next_state = np.random.rand(10)
+        reward = np.random.rand()
+        return next_state, reward
+
+# --- Simulation Training Loop with Domain Randomization ---
+robot = SimulatedRobot()
+
+for episode in range(10): # Run 10 training episodes
+    print(f"\n--- EPISODE {episode + 1} ---")
+    robot.randomize_domain() # Randomize environment for each episode
+
+    # Reset robot to initial state in the randomized environment
+    current_state = np.zeros(10) 
+
+    for step in range(100): # Simulate 100 steps per episode
+        action = np.random.rand(4) # Random actions for illustration
+        next_state, reward = robot.simulate_step(action)
+        current_state = next_state
+        # In a real RL setup, the agent would learn from (current_state, action, reward, next_state)
+```
+</CodeBlock>
+</TabItem>
+</Tabs>

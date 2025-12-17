@@ -92,7 +92,8 @@ We can't train a full model here, but we can illustrate the fundamental data str
 <Tabs>
 <TabItem value="python" label="Python">
 <CodeBlock language="python">
-{`import numpy as np
+```python
+import numpy as np
 
 class ExpertDemonstrationRecorder:
     """A simple class to simulate the recording of expert demonstrations."""
@@ -141,7 +142,8 @@ recorder.record_step(sim_camera_img_2, sim_joint_angles_2, sim_joystick_2)
 # Now, `recorder.demonstrations` holds the data needed to train a
 # behavioral cloning model. The model's job would be to learn a function `f`
 # where `f(state) -> expert_action`.
-`}
+```
 </CodeBlock>
 </TabItem>
 </Tabs>
+```

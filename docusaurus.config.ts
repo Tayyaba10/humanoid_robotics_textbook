@@ -11,13 +11,14 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://ai-and-robotics.github.io',
-  baseUrl: '/humanoid-robotics-textbook/',
+  url: 'https://Tayyaba10.github.io',
+  baseUrl: '/humanoid_robotics_textbook/',
 
-  organizationName: 'ai-and-robotics',
-  projectName: 'humanoid-robotics-textbook',
+  organizationName: 'Tayyaba10',
+  projectName: 'humanoid_robotics_textbook',
 
   onBrokenLinks: 'throw',
+  trailingSlash: true,
 
   i18n: {
     defaultLocale: 'en',
@@ -30,7 +31,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          routeBasePath: '/', // Serve the docs at the site's root
+          routeBasePath: 'docs', // Serve the docs at the /docs path
         },
         blog: false, // Disable the blog
         theme: {
@@ -52,13 +53,19 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          to: '/',
+          label: 'Home',
           position: 'left',
-          label: 'Chapters',
+          activeBaseRegex: `^/$`,
         },
         {
-          href: 'https://github.com/ai-and-robotics/humanoid-robotics-textbook',
+          type: 'doc',
+          docId: 'intro',
+          position: 'left',
+          label: 'Docs',
+        },
+        {
+          href: 'https://github.com/Tayyaba10/humanoid_robotics_textbook',
           label: 'GitHub',
           position: 'right',
         },

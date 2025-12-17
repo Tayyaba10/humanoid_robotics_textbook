@@ -1,0 +1,62 @@
+---
+id: chapter-1.1-introduction-to-ros2
+title: "ROS 2: The Brain's Operating System"
+description: "This chapter introduces the Robot Operating System (ROS) 2, its architecture, and fundamental middleware concepts essential for robotic development."
+sidebar_position: 1
+---
+
+# ROS 2: The Brain's Operating System
+
+## Module Objective
+
+To introduce the core concepts and practical applications of ROS 2 as the foundational software framework for humanoid robotics, enabling students to set up, understand, and interact with a robot's "nervous system."
+
+## Learning Goals
+
+Upon completing this chapter, you will be able to:
+
+*   Understand the core architecture of ROS 2 (nodes, topics, services, actions).
+*   Set up a ROS 2 Jazzy development environment on an RTX workstation.
+*   Learn to use basic ROS 2 command-line tools.
+*   Create and run simple ROS 2 nodes in Python.
+
+## Core Topics
+
+This chapter will cover:
+
+### 1. Introduction to ROS 2
+
+*   What is ROS 2?
+*   Why ROS 2 for Humanoid Robotics?
+*   Key architectural concepts: Nodes, Topics, Services, Actions.
+*   The Data Distribution Service (DDS) layer.
+
+### 2. Setting Up Your ROS 2 Development Environment
+
+*   System requirements (RTX Workstation recommended).
+*   Detailed installation guide for ROS 2 Jazzy.
+*   Verifying your installation.
+*   Introduction to `colcon` build system.
+
+### 3. Basic ROS 2 Command-Line Tools
+
+*   `ros2 run`: Executing ROS 2 nodes.
+*   `ros2 topic`: Inspecting and publishing to topics.
+*   `ros2 node`: Managing and inspecting nodes.
+*   Other essential commands for debugging and introspection.
+
+### 4. Your First ROS 2 Program in Python
+
+*   Overview of `rclpy` (ROS 2 Client Library for Python).
+*   Creating a simple "talker" node.
+*   Creating a simple "listener" node.
+*   Understanding message types and publishing/subscribing.
+
+## Hands-on Exercise: "Hello ROS 2 World"
+
+Create two Python nodes: a "talker" that publishes a string message "Hello ROS 2 from Talker!" to a `/chatter` topic every second, and a "listener" that subscribes to `/chatter` and prints the received messages. You will compile, run, and observe the communication between these nodes using ROS 2 command-line tools.
+
+## Constraints
+
+*   This chapter focuses on a single-machine setup.
+*   We will not delve into distributed systems or advanced network configurations for ROS 2 at this stage.
