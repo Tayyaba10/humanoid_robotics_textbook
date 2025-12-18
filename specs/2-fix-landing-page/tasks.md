@@ -14,7 +14,7 @@
 - [ ] T001 [US1] Modify `humanoid-robotics-textbook/docusaurus.config.ts` to set the `routeBasePath` for the docs plugin to `'docs'`.
 - [ ] T002 [US1] Create the landing page component file `humanoid-robotics-textbook/src/pages/index.tsx`.
 - [ ] T003 [US1] In `humanoid-robotics-textbook/src/pages/index.tsx`, add the book title, subtitle, and a short description.
-- [ ] T004 [US1] In `humanoid-robotics-textbook/src/pages/index.tsx`, add two CTA buttons: "Start Reading" linking to `/docs/intro` and "View Modules" linking to `/docs`.
+- [X] T004 [US1] In `humanoid-robotics-textbook/src/pages/index.tsx`, add two CTA buttons: "Start Reading" linking to `/docs/intro` and "View Modules" linking to `/docs`.
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently.
 
