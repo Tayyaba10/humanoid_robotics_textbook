@@ -28,7 +28,7 @@
 
 ### Implementation for User Story 2
 
-- [ ] T005 [US2] Update the `navbar` configuration in `humanoid-robotics-textbook/docusaurus.config.ts` to include a link to the "Docs" section.
+- [X] T005 [US2] Update the `navbar` configuration in `humanoid-robotics-textbook/docusaurus.config.ts` to include a link to the "Docs" section.
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently.
 
@@ -38,7 +38,7 @@
 
 **Purpose**: Final validation and verification.
 
-- [ ] T006 Run all validation steps outlined in `specs/2-fix-landing-page/quickstart.md` to confirm the feature is working as expected.
+- [X] T006 Run all validation steps outlined in `specs/2-fix-landing-page/quickstart.md` to confirm the feature is working as expected.
 
 ---
 
