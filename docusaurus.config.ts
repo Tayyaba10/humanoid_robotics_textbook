@@ -11,7 +11,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://Tayyaba10.github.io',
+  url: 'https://tayyaba10.github.io/',
   baseUrl: '/humanoid_robotics_textbook/',
 
   organizationName: 'Tayyaba10',
