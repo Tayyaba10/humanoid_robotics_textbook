@@ -1,0 +1,88 @@
+# CLI Contract: RAG Retrieval Tool
+
+**Feature**: 001-rag-retrieval
+**Created**: 2025-12-26
+**Status**: Draft
+
+## Command-Line Interface Specification
+
+### Command Structure
+```
+python -m backend.src.cli.retrieve [OPTIONS]
+```
+
+### Arguments
+
+#### Required Arguments
+- `--query` (string)
+  - Description: User input query string to search for
+  - Type: string
+  - Example: `"What is humanoid robotics?"`
+
+#### Optional Arguments
+- `--top_k` (integer)
+  - Description: Number of top results to return
+  - Type: integer
+  - Default: 5
+  - Minimum: 1
+  - Maximum: 100
+  - Example: `10`
+
+### Exit Codes
+- `0`: Success - results retrieved and displayed
+- `1`: General error - configuration or runtime error
+- `2`: Invalid arguments - incorrect command-line arguments
+- `3`: Connection error - unable to connect to external services
+- `4`: Authentication error - invalid API credentials
+
+### Environment Variables
+- `QDRANT_HOST`: URL for Qdrant service (required)
+- `QDRANT_API_KEY`: API key for Qdrant authentication (required)
+- `COLLECTION_NAME`: Name of the collection to search (required)
+- `COHERE_API_KEY`: API key for Cohere service (required)
+
+### Input Validation
+- Query must not be empty or all whitespace
+- top_k must be a positive integer
+- top_k must not exceed 100
+
+### Output Format
+```
+[1] Score: 0.84
+    Source: chapter_3.md
+    Chunk: 12
+    Text: Humanoid robots use vision and tactile sensors...
+
+[2] Score: 0.78
+    Source: chapter_5.pdf
+    Chunk: 7
+    Text: Advanced locomotion algorithms...
+```
+
+### Error Messages
+- Configuration errors: "Error: Missing required environment variable: {variable_name}"
+- Connection errors: "Error: Unable to connect to {service_name}"
+- Authentication errors: "Error: Authentication failed for {service_name}"
+- Input validation errors: "Error: {specific_validation_error}"
+- General errors: "Error: {descriptive_error_message}"
+
+## Example Usage
+
+### Basic Usage
+```bash
+python -m backend.src.cli.retrieve --query "What is humanoid robotics?" --top_k 5
+```
+
+### With Default Top-K
+```bash
+python -m backend.src.cli.retrieve --query "How do robots navigate?"
+```
+
+### Environment Configuration
+```bash
+export QDRANT_HOST="https://your-cluster.qdrant.tech:6333"
+export QDRANT_API_KEY="your-api-key"
+export COLLECTION_NAME="robotics_docs"
+export COHERE_API_KEY="your-cohere-api-key"
+python -m backend.src.cli.retrieve --query "locomotion algorithms" --top_k 3
+```
